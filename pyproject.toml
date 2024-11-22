@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arxml-parse"
+version = "0.1.0"
+description = "ARXML parser"
+readme = "README.md"
+authors = [
+    { name = "Artur Drogunow", email = "Artur.Drogunow@zf.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "xsdata>=24.11",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.13.*",
+    "ruff==0.8.0",
+    "xsdata[cli]>=24.11",
+]
+
+[tool.ruff]
+line-length = 100
+lint.extend-select = [
+    "UP",   # pyupgrade
+]
+lint.ignore = [
+    "E741",  # ambiguous-variable-name
+]
