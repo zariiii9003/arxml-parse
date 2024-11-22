@@ -25,8 +25,24 @@ dev = [
 [tool.ruff]
 line-length = 100
 lint.extend-select = [
-    "UP",   # pyupgrade
+    "B",     # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "E",     # pycodestyle
+    "EM",    # flake8-errmsg
+    "F",     # pyflakes
+    "G",     # flake8-logging-format
+    "I",     # isort
+    "N",     # pep8-naming
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "RSE",   # flake8-raise
+    "RUF",   # Ruff-specific rules
+    "SIM",   # flake8-simplify
+    "TCH",   # flake8-type-checking
+    "UP",    # pyupgrade
+    "W",     # pycodestyle
 ]
 lint.ignore = [
+    "E501",  # line-too-long
     "E741",  # ambiguous-variable-name
 ]
