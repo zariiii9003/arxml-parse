@@ -2,8 +2,8 @@ import re
 import subprocess
 from io import BytesIO
 from pathlib import Path
-from zipfile import ZipFile
 from urllib.request import urlopen
+from zipfile import ZipFile
 
 CODEGEN_DIR = Path(__file__).parent
 PROJECT_DIR = CODEGEN_DIR.parent
@@ -35,14 +35,14 @@ def download_xsd(zipfile_url: str) -> tuple[str, bytes]:
 
 if __name__ == "__main__":
     xsd_directories: list[Path] = []
-    for xsd_name in URL_MAP:
+    for xsd_name, xsd_zip_url in URL_MAP.items():
         xsd_dir = CODEGEN_DIR / Path(xsd_name).stem.lower().replace("-", "_")
         xsd_directories.append(xsd_dir)
         if not xsd_dir.exists():
             xsd_dir.mkdir()
         xsd_path = xsd_dir / xsd_name
         if not xsd_path.exists():
-            download_name, xsd_bytes = download_xsd(URL_MAP[xsd_name])
+            download_name, xsd_bytes = download_xsd(xsd_zip_url)
             assert download_name == xsd_name
             xsd_path.write_bytes(xsd_bytes)
 
@@ -59,6 +59,7 @@ if __name__ == "__main__":
                 xsd_dir,
             ],
             cwd=LIBRARY_DIR,
+            check=False,
         )
         subprocess.run(
             [
@@ -70,6 +71,7 @@ if __name__ == "__main__":
                 target_dir,
             ],
             cwd=PROJECT_DIR,
+            check=False,
         )
         subprocess.run(
             [
@@ -80,4 +82,5 @@ if __name__ == "__main__":
                 target_dir,
             ],
             cwd=PROJECT_DIR,
+            check=False,
         )
