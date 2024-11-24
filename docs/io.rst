@@ -44,4 +44,3 @@ API
 ^^^
 
 .. automodule:: arxml_parse.io
-   :members:
