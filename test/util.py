@@ -27,7 +27,7 @@ def download_arxml(zipfile_url: str) -> tuple[str, bytes]:
     raise FileNotFoundError
 
 
-def get_example_file(schema_name: str) -> bytes:
+def get_example_file(schema_name: str) -> Path:
     """Retrieve cached arxml from data directory or download."""
     if not DATA_DIR.exists():
         DATA_DIR.mkdir()
@@ -35,4 +35,4 @@ def get_example_file(schema_name: str) -> bytes:
     if not target_path.exists():
         _name, arxml_bytes = download_arxml(URL_MAP[schema_name])
         target_path.write_bytes(arxml_bytes)
-    return target_path.read_bytes()
+    return target_path

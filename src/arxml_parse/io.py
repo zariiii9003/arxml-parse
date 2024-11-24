@@ -1,5 +1,6 @@
+import re
 from pathlib import Path
-from typing import IO, TYPE_CHECKING
+from typing import IO, TYPE_CHECKING, cast
 
 from xsdata.formats.dataclass.parsers import XmlParser
 from xsdata.formats.dataclass.serializers import XmlSerializer
@@ -35,167 +36,172 @@ if TYPE_CHECKING:
     )
 
 
-def _read_arxml(arxml: Path | bytes | IO[bytes]) -> bytes:
+def _read_arxml(arxml: Path | str | IO[str]) -> str:
     """Read ARXML content from the given input.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
-    :return: The content as bytes.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
+    :return: The content as a string.
     :raises ValueError: If the input type is unsupported.
     """
-    if isinstance(arxml, bytes):
+    if isinstance(arxml, str):
         return arxml
     elif isinstance(arxml, Path):
-        return arxml.read_bytes()
+        # try to detect encoding, use utf-8 as fallback
+        encoding = "utf-8"
+        with arxml.open(mode="rt", encoding=encoding) as file:
+            first_line = file.readline()
+            if match := re.search(r"encoding=\"(?P<encoding>.*?)\"", first_line):
+                encoding = cast(str, match["encoding"])
+        return arxml.read_text(encoding=encoding)
     elif hasattr(arxml, "read") and callable(arxml.read):
         return arxml.read()
     else:
         err_msg = (
-            "Unsupported input type for 'arxml'. "
-            "Must be Path, bytes, or a binary file-like object."
+            "Unsupported input type for 'arxml'. " "Must be Path, string, or a file-like object."
         )
         raise ValueError(err_msg)
 
 
-def parse_autosar_00042(arxml: Path | bytes | IO[bytes]) -> "Autosar00042":
+def parse_autosar_00042(arxml: Path | str | IO[str]) -> "Autosar00042":
     """Parse an ARXML file conforming to AUTOSAR schema version 00042.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00042 object.
     """
     from .autosar_00042 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00043(arxml: Path | bytes | IO[bytes]) -> "Autosar00043":
+def parse_autosar_00043(arxml: Path | str | IO[str]) -> "Autosar00043":
     """Parse an ARXML file conforming to AUTOSAR schema version 00043.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00043 object.
     """
     from .autosar_00043 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00044(arxml: Path | bytes | IO[bytes]) -> "Autosar00044":
+def parse_autosar_00044(arxml: Path | str | IO[str]) -> "Autosar00044":
     """Parse an ARXML file conforming to AUTOSAR schema version 00044.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00044 object.
     """
     from .autosar_00044 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00045(arxml: Path | bytes | IO[bytes]) -> "Autosar00045":
+def parse_autosar_00045(arxml: Path | str | IO[str]) -> "Autosar00045":
     """Parse an ARXML file conforming to AUTOSAR schema version 00045.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00045 object.
     """
     from .autosar_00045 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00046(arxml: Path | bytes | IO[bytes]) -> "Autosar00046":
+def parse_autosar_00046(arxml: Path | str | IO[str]) -> "Autosar00046":
     """Parse an ARXML file conforming to AUTOSAR schema version 00046.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00046 object.
     """
     from .autosar_00046 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00047(arxml: Path | bytes | IO[bytes]) -> "Autosar00047":
+def parse_autosar_00047(arxml: Path | str | IO[str]) -> "Autosar00047":
     """Parse an ARXML file conforming to AUTOSAR schema version 00047.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00047 object.
     """
     from .autosar_00047 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00048(arxml: Path | bytes | IO[bytes]) -> "Autosar00048":
+def parse_autosar_00048(arxml: Path | str | IO[str]) -> "Autosar00048":
     """Parse an ARXML file conforming to AUTOSAR schema version 00048.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00048 object.
     """
     from .autosar_00048 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00049(arxml: Path | bytes | IO[bytes]) -> "Autosar00049":
+def parse_autosar_00049(arxml: Path | str | IO[str]) -> "Autosar00049":
     """Parse an ARXML file conforming to AUTOSAR schema version 00049.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00049 object.
     """
     from .autosar_00049 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00050(arxml: Path | bytes | IO[bytes]) -> "Autosar00050":
+def parse_autosar_00050(arxml: Path | str | IO[str]) -> "Autosar00050":
     """Parse an ARXML file conforming to AUTOSAR schema version 00050.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00050 object.
     """
     from .autosar_00050 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00051(arxml: Path | bytes | IO[bytes]) -> "Autosar00051":
+def parse_autosar_00051(arxml: Path | str | IO[str]) -> "Autosar00051":
     """Parse an ARXML file conforming to AUTOSAR schema version 00051.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00051 object.
     """
     from .autosar_00051 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 
-def parse_autosar_00052(arxml: Path | bytes | IO[bytes]) -> "Autosar00052":
+def parse_autosar_00052(arxml: Path | str | IO[str]) -> "Autosar00052":
     """Parse an ARXML file conforming to AUTOSAR schema version 00052.
 
-    :param arxml: The ARXML input, either a Path, bytes, or binary file-like object.
+    :param arxml: The ARXML input, either a Path, string, or file-like object.
     :return: Parsed AUTOSAR 00052 object.
     """
     from .autosar_00052 import Autosar
 
-    arxml_bytes = _read_arxml(arxml)
-    root = XmlParser().from_bytes(arxml_bytes, Autosar)
+    arxml_text = _read_arxml(arxml)
+    root = XmlParser().from_string(arxml_text, Autosar)
     return root
 
 

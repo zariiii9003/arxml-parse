@@ -22,9 +22,9 @@ classifiers = [
 
 [dependency-groups]
 dev = [
-    "ruff==0.8.0",
     "tox>=4.23.2",
     "xsdata[cli]>=24.11",
+    {include-group = "lint"},
 ]
 doc = [
     "furo>=2024.8.6",
