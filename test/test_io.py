@@ -1,7 +1,7 @@
 from test.util import get_example_file
 
 
-def test_parse44():
+def test_autosar_00044():
     from arxml_parse.autosar_00044 import Autosar
     from arxml_parse.io import parse_autosar_00044, serialize
 
@@ -13,7 +13,7 @@ def test_parse44():
     assert isinstance(root, Autosar)
 
 
-def test_parse46():
+def test_autosar_00046():
     from arxml_parse.autosar_00046 import Autosar
     from arxml_parse.io import parse_autosar_00046, serialize
 
@@ -25,7 +25,7 @@ def test_parse46():
     assert isinstance(root, Autosar)
 
 
-def test_parse48():
+def test_autosar_00048():
     from arxml_parse.autosar_00048 import Autosar
     from arxml_parse.io import parse_autosar_00048, serialize
 
@@ -37,7 +37,7 @@ def test_parse48():
     assert isinstance(root, Autosar)
 
 
-def test_parse49():
+def test_autosar_00049():
     from arxml_parse.autosar_00049 import Autosar
     from arxml_parse.io import parse_autosar_00049, serialize
 
@@ -49,7 +49,7 @@ def test_parse49():
     assert isinstance(root, Autosar)
 
 
-def test_parse50():
+def test_autosar_00050():
     from arxml_parse.autosar_00050 import Autosar
     from arxml_parse.io import parse_autosar_00050, serialize
 
@@ -61,7 +61,7 @@ def test_parse50():
     assert isinstance(root, Autosar)
 
 
-def test_parse51():
+def test_autosar_00051():
     from arxml_parse.autosar_00051 import Autosar
     from arxml_parse.io import parse_autosar_00051, serialize
 
@@ -73,7 +73,7 @@ def test_parse51():
     assert isinstance(root, Autosar)
 
 
-def test_parse52():
+def test_autosar_00052():
     from arxml_parse.autosar_00052 import Autosar
     from arxml_parse.io import parse_autosar_00052, serialize
 
