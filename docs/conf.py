@@ -28,9 +28,7 @@ autodoc_typehints = "description"
 # The default autodoc directive flags
 autodoc_default_options = {
     "members": True,
-    "undoc-members": True,
     "show-inheritance": True,
-    "member-order": "bysource",
 }
 
 # decide whether module names are prepended to all object names

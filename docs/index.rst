@@ -6,7 +6,7 @@ of the `xsdata <https://github.com/tefra/xsdata/>`__ code generator.
 As such, the library is fully compliant with `mypy --strict` type checking.
 
 The `arxml_parse.io` module contains functions to parse arxml files and return
-the xml root object (e.g. :class:`~arxml_parse.autosar_00042.autosar_00042.Autosar`).
+the xml root object (e.g. :class:`~arxml_parse.autosar_00042.Autosar`).
 
 Installation
 ------------
